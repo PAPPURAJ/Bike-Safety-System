@@ -38,10 +38,16 @@ void setup(void) {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
   
+  pinMode(D4,OUTPUT);
   while (WiFi.status() != WL_CONNECTED)
   {
+    digitalWrite(D4,0);
     Serial.print(".");
-    delay(300);
+    delay(200);
+    digitalWrite(D4,1);
+    Serial.print(".");
+    delay(200);
+    
   }
   
   Serial.println();
