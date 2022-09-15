@@ -1,14 +1,16 @@
-package com.blogspot.rajbtc.smartbikesafetysystem;
+package com.blogspot.rajbtc.vachicle_safety;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blogspot.rajbtc.vachicle_safety.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,13 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    double x, y,temp,lat,lon,danger;
+    double x, y,temp,lat,lon;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.alarm);
         try{
             loadData();
         }catch (Exception e){
@@ -76,8 +79,13 @@ public class MainActivity extends AppCompatActivity {
         fd.child("Danger").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                danger=Double.parseDouble(snapshot.getValue(String.class));
-                update();
+
+                if(snapshot.getValue(String.class).toString().contains("1"))
+                {
+                    if(!mediaPlayer.isPlaying())
+                        mediaPlayer.start();;
+                }else
+                    mediaPlayer.stop();
             }
 
             @Override

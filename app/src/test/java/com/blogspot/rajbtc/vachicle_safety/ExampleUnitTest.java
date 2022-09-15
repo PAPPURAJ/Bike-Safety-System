@@ -1,4 +1,4 @@
-package com.blogspot.rajbtc.smartbikesafetysystem;
+package com.blogspot.rajbtc.vachicle_safety;
 
 import org.junit.Test;
 

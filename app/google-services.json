@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "914952824248",
-    "firebase_url": "https://bikesafety-870a7-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "bikesafety-870a7",
-    "storage_bucket": "bikesafety-870a7.appspot.com"
+    "project_number": "727083153082",
+    "firebase_url": "https://vachiclesafety-default-rtdb.firebaseio.com",
+    "project_id": "vachiclesafety",
+    "storage_bucket": "vachiclesafety.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:914952824248:android:09cc9fd893d4c639325b4d",
+        "mobilesdk_app_id": "1:727083153082:android:b404a15c0ef0f96dd33483",
         "android_client_info": {
-          "package_name": "com.blogspot.rajbtc.smartbikesafetysystem"
+          "package_name": "com.blogspot.rajbtc.vachicle_safety"
         }
       },
       "oauth_client": [
         {
-          "client_id": "914952824248-k6o502f6214t0vcv4p9u2ujvqcsb0nut.apps.googleusercontent.com",
+          "client_id": "727083153082-j241n0jghoolpp1cu24iddds9hm73al8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDJ0NFX8bbFsYLZtsMMCf9jwMHEmQmwjn4"
+          "current_key": "AIzaSyBweh__2ikmnKs2EJ_fo0iCzCyJic5iOnE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "914952824248-k6o502f6214t0vcv4p9u2ujvqcsb0nut.apps.googleusercontent.com",
+              "client_id": "727083153082-j241n0jghoolpp1cu24iddds9hm73al8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
