@@ -10,8 +10,15 @@ TinyGPSPlus gps;
 FirebaseData firebaseData;
 FirebaseJson json;
 
-#define FIREBASE_HOST "bikesafety-870a7-default-rtdb.asia-southeast1.firebasedatabase.app"  
-#define FIREBASE_AUTH "EBuWwzzxfRXKcBtc571zhRykPT2r03XghhkQTYK0"
+const int trigpin= D6;  
+const int echopin= D7;  
+
+long duration;  
+int distance,disLim=40;  
+ 
+
+#define FIREBASE_HOST "vachiclesafety-default-rtdb.firebaseio.com"  
+#define FIREBASE_AUTH "UNE2g5wOAmysdIXQWXXXH1nlGeSCSPq8djVgg7af"
 
 #define WIFI_SSID "BikeSafety_IOT"     
 #define WIFI_PASSWORD "12345678" 
@@ -33,6 +40,9 @@ void writeDB(String field,String value){
 
 
 void setup(void) {
+
+ pinMode(trigpin,OUTPUT);  
+  pinMode(echopin,INPUT); 
   
   Serial.begin(9600);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -77,6 +87,17 @@ double xLimit=5.0,yLimit=5.0, tLimit=50.0;
 
 void loop() {
 
+
+
+  digitalWrite(trigpin,HIGH);  
+  delayMicroseconds(10);  
+  digitalWrite(trigpin,LOW);  
+  duration=pulseIn(echopin,HIGH);  
+  distance = duration*0.034/2;  
+  Serial.print(distance);  
+
+  
+
      while(Serial.available())             
   {
     gps.encode(Serial.read());       
@@ -118,7 +139,7 @@ void loop() {
    writeDB("/X",String(x));
    writeDB("/Y",String(y));
    writeDB("/Temp",String(tem));
-   writeDB("/Danger",String(xLimit<=x || yLimit<=y || tLimit<=tem)); 
+   writeDB("/Danger",String(xLimit<=x || yLimit<=y || tLimit<=tem || distance<disLim)); 
 
 
   delay(250);
