@@ -1,16 +1,17 @@
-package com.blogspot.rajbtc.vachicle_safety;
+package com.blogspot.rajbtc.smartbikesafetysystem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blogspot.rajbtc.vachicle_safety.R;
+import com.blogspot.rajbtc.smartbikesafetysystem.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,13 +21,15 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     double x, y,temp,lat,lon;
-    MediaPlayer mediaPlayer;
+    int sleep=0;
+    MediaPlayer mediaPlayer,sleepPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.alarm);
+        mediaPlayer=MediaPlayer.create(getBaseContext(),R.raw.alarm);
+        sleepPlayer=MediaPlayer.create(getBaseContext(),R.raw.wakeup);
         try{
             loadData();
         }catch (Exception e){
@@ -36,6 +39,27 @@ public class MainActivity extends AppCompatActivity {
 
     void loadData(){
         DatabaseReference fd=FirebaseDatabase.getInstance().getReference("Data");
+
+
+        fd.child("Sleep").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                sleep=Integer.parseInt(snapshot.getValue(String.class));
+                update();
+
+                if(sleep==1)
+                {
+                    if(!sleepPlayer.isPlaying())
+                        sleepPlayer.start();;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         fd.child("X").addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         fd.child("Y").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -84,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(!mediaPlayer.isPlaying())
                         mediaPlayer.start();;
-                }else
-                    mediaPlayer.stop();
+                }
             }
 
             @Override
@@ -137,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
        ((TextView) findViewById(R.id.latTv)).setText("Latitude: "+lat);
        ((TextView) findViewById(R.id.lonTv)).setText("longitude: "+lon);
        ((TextView) findViewById(R.id.tempTv)).setText("temperate: "+temp);
+       ((TextView) findViewById(R.id.sleepTv)).setText("Sleeping Status: "+(sleep==1?"Sleeping":"Active"));
+       ((TextView) findViewById(R.id.sleepTv)).setTextColor(sleep==1?Color.parseColor("#ff0000"):Color.parseColor("#0000ff"));
 
     }
 

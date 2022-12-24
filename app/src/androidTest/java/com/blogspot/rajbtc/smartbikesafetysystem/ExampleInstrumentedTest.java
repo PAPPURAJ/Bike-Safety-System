@@ -1,4 +1,4 @@
-package com.blogspot.rajbtc.vachicle_safety;
+package com.blogspot.rajbtc.smartbikesafetysystem;
 
 import android.content.Context;
 

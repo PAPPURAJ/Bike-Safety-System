@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blogspot.rajbtc.vachicle_safety">
+    package="com.blogspot.rajbtc.smartbikesafetysystem">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartBikeSafetySystem">
         <activity
-            android:name="com.blogspot.rajbtc.vachicle_safety.MainActivity"
+            android:name="com.blogspot.rajbtc.smartbikesafetysystem.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
